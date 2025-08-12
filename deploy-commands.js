@@ -48,6 +48,7 @@ const rest = new REST().setToken(token);
             { body: commands},
         );
 
+        console.log(`Successfully reloaded ${data.length} aplication (/) command.`);
     }catch(error){
         //And of courese, make you catch and log any errors!
         console.error(error);
