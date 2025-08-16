@@ -1,5 +1,5 @@
 const {SlashCommandBuilder} = require('discord.js')
-const {pokemondata} = require('../../pokemondata')
+const {pokemondata, getDexEntries} = require('../../pokemondata')
 
 
 module.exports={
@@ -13,7 +13,8 @@ module.exports={
 
     async execute(interaction){
         const poke = interaction.options.get('pokemon').value;
-        pokemondata(poke);
-        console.log(poke);   
+        data = await pokemondata(poke);
+        console.log(data);
+        getDexEntries(data.species.url); 
     }
 }
