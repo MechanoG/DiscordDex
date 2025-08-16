@@ -1,5 +1,5 @@
 const {SlashCommandBuilder, User} = require('discord.js');
-const { execute } = require('./ping');
+
 
 module.exports = {
     data : new SlashCommandBuilder()
@@ -9,4 +9,4 @@ module.exports = {
     async execute(interaction){
         await interaction.reply(`This command was run by ${interaction.user.username}, who joined on ${interaction.member.joinedAt}.`);
     },
-};
+}
