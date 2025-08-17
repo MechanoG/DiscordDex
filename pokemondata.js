@@ -1,4 +1,8 @@
-const pokeurl = 'https://pokeapi.co/api/v2/pokemon'
+const {EmbedBuilder,Client,GatewayIntentBits} = require('discord.js');
+
+const pokeurl = 'https://pokeapi.co/api/v2/pokemon';
+const client = new Client({ intents: [GatewayIntentBits.Guilds] });
+
 
 async function pokemondata(pokename){
     
@@ -42,7 +46,23 @@ async function getDexEntries(url){
     
 }
 
-module.exports = {pokemondata, getDexEntries};
+///Embed, nombre, imagen, 
+
+function embedReturn(name, spriteUrl, dexData){
+    const pokeEmbed = new EmbedBuilder()
+        .setTitle(`${name}`)
+        .setImage(`${spriteUrl}`);
+
+    console.log(`${dexData}`)
+
+   
+
+    return {embeds: [pokeEmbed]};
+    
+}
+
+
+module.exports = {pokemondata, getDexEntries, embedReturn};
 
 
 

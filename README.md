@@ -30,3 +30,7 @@ se usara un modulo para obtener los datos de la api, y devolverla en forma de JS
 los comandos se encargar de obtener el tipo de informacion en especifico.
 
 ///No debe ser un eply, sino un emdebed
+//Debe tener:
+Nombre Header.
+Imagen
+Datos Pokedex
