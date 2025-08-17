@@ -28,3 +28,5 @@ These steps can be done in any order, but all are required before the commands a
 se usara un modulo para obtener los datos de la api, y devolverla en forma de JSON.
 
 los comandos se encargar de obtener el tipo de informacion en especifico.
+
+///No debe ser un eply, sino un emdebed

@@ -14,7 +14,12 @@ module.exports={
     async execute(interaction){
         const poke = interaction.options.get('pokemon').value;
         data = await pokemondata(poke);
-        console.log(data);
-        getDexEntries(data.species.url); 
+        //console.log(data);
+        let dexData = await getDexEntries(data.species.url);
+
+        const version = dexData[0][0];
+        const pokedata = dexData[0][1];
+        await interaction.reply(`${version} data:\n` + `${pokedata}`);        
+
     }
 }

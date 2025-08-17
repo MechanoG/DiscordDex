@@ -18,10 +18,24 @@ async function pokemondata(pokename){
 }
 async function getDexEntries(url){
 
+    let returnDex = [];
+
     try{
         const dex = await fetch(url)
-        const dexjson = await dex.json();
-        console.log(dexjson.flavor_text_entries);
+        const species = await dex.json();
+        const dexEntries = species.flavor_text_entries;
+        for (let entry of dexEntries){
+
+            if (entry.language.name === "es"){
+                
+                let entryData = [ entry.version.name, entry.flavor_text]; 
+
+                returnDex.push(entryData);   
+            }
+        }
+
+        return returnDex;
+
     }catch(error){
         console.log(error);
     }
