@@ -3,7 +3,6 @@ const {EmbedBuilder,Client,GatewayIntentBits} = require('discord.js');
 const pokeurl = 'https://pokeapi.co/api/v2/pokemon';
 const client = new Client({ intents: [GatewayIntentBits.Guilds] });
 
-
 async function pokemondata(pokename){
     
     const pokemonurl = pokeurl + '/' + pokename;
@@ -20,6 +19,7 @@ async function pokemondata(pokename){
         console.log(error);
     }   
 }
+
 async function getDexEntries(url){
 
     let returnDex = [];
@@ -48,20 +48,27 @@ async function getDexEntries(url){
 
 ///Embed, nombre, imagen, 
 
-function embedReturn(name, spriteUrl, dexData){
+function typeAsing(types){
+
+    if (types.length>1) return `${types[0].type.name} | ${types[1].type.name}`
+        
+    return `${types[0].type.name}`  
+    
+    
+
+}
+
+function embedReturn(name, spriteUrl, dexData, types){
     const pokeEmbed = new EmbedBuilder()
-        .setTitle(`${name}`)
-        .setImage(`${spriteUrl}`);
-
-    console.log(`${dexData}`)
-
-   
-
+        .setTitle(`${name} - ${typeAsing(types)}`)
+        .setImage(`${spriteUrl}`)
+        .addFields(
+            {name: `DEXDATA`, value: dexData }
+        ); 
+    
     return {embeds: [pokeEmbed]};
     
 }
-
-
 module.exports = {pokemondata, getDexEntries, embedReturn};
 
 
