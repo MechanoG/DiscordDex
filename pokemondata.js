@@ -46,30 +46,53 @@ async function getDexEntries(url){
     
 }
 
-///Embed, nombre, imagen, 
+function statsReturn(stats){
+    let finalStats = [];
+
+    for (let element of stats){
+        const statName = element.stat.name;
+        const statValue = element.base_stat;
+        finalStats.push([statName, statValue]);
+    }
+
+    console.log(finalStats);
+    return finalStats;
+
+}
 
 function typeAsing(types){
 
     if (types.length>1) return `${types[0].type.name} | ${types[1].type.name}`
-        
     return `${types[0].type.name}`  
-    
-    
-
 }
 
-function embedReturn(name, spriteUrl, dexData, types){
+function embedReturn(name, spriteUrl, dexData, types, stats){
+
     const pokeEmbed = new EmbedBuilder()
         .setTitle(`${name} - ${typeAsing(types)}`)
         .setImage(`${spriteUrl}`)
         .addFields(
-            {name: `DEXDATA`, value: dexData }
+            {name: `DEXDATA`, value: dexData },
+            {name: `Stats`, value: `${stats[0][0]} : ${stats[0][1]}
+                                    ${stats[1][0]} : ${stats[1][1]} 
+                                    ${stats[2][0]} : ${stats[2][1]}
+                                    ${stats[3][0]} : ${stats[3][1]}
+                                    ${stats[4][0]} : ${stats[4][1]}
+                                    ${stats[5][0]} : ${stats[5][1]}
+                                    ${`Total Stats :` + String(stats[0][1] +
+                                                               stats[1][1] +
+                                                               stats[2][1] +
+                                                               stats[3][1] +
+                                                               stats[4][1] +
+                                                               stats[5][1])}`
+                                }
+
         ); 
     
     return {embeds: [pokeEmbed]};
     
 }
-module.exports = {pokemondata, getDexEntries, embedReturn};
+module.exports = {pokemondata, getDexEntries, embedReturn, statsReturn};
 
 
 

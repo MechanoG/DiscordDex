@@ -1,5 +1,5 @@
 const {Client, GatewayIntentBits, SlashCommandBuilder, EmbedBuilder} = require('discord.js')
-const {pokemondata, getDexEntries,embedReturn} = require('../../pokemondata')
+const {pokemondata, getDexEntries,embedReturn, statsReturn} = require('../../pokemondata')
 
 
 module.exports={
@@ -18,7 +18,10 @@ module.exports={
         const types = data.types;
         const version = dexData[0][0];
         const pokedata = dexData[0][1];
-        let embededReply = embedReturn(data.name, data.sprites.front_default, pokedata, types);
+        const stats = statsReturn(data.stats);
+        
+
+        let embededReply = embedReturn(data.name, data.sprites.front_default, pokedata, types,stats);
         interaction.channel.send(embededReply);
         
         //await interaction.reply(`${version} data:\n` + `${pokedata}`); 
