@@ -46,6 +46,22 @@ async function getDexEntries(url){
     
 }
 
+async function getDexNum(url){
+   
+    try{
+        const dex = await fetch(url)
+        const species = await dex.json();
+        const dexnum = species.pokedex_numbers[0].entry_number;
+        
+
+        return dexnum;
+
+    }catch(error){
+        console.log(error);
+    }
+    
+}
+
 function statsReturn(stats){
     let finalStats = [];
 
@@ -66,14 +82,18 @@ function typeAsing(types){
     return `${types[0].type.name}`  
 }
 
-function embedReturn(name, spriteUrl, dexData, types, stats){
+function embedReturn(name, spriteUrl, dexData, types, stats, dexNum, altura, peso){
 
     const pokeEmbed = new EmbedBuilder()
-        .setTitle(`${name} - ${typeAsing(types)}`)
+        .setTitle('NATIONAL POKEDEX:')
         .setImage(`${spriteUrl}`)
         .addFields(
-            {name: `DEXDATA`, value: dexData },
-            {name: `Stats`, value: `${stats[0][0]} : ${stats[0][1]}
+            {name: `No ${dexNum}  ${name}`, value: ""},
+            {name: `HEIGHT: ${altura/10} m`, value:""},
+            {name: `WEIGHT: ${peso/10} kg`, value:""},
+            {name: `TYPES: ${typeAsing(types)}`, value:""},
+            {name: `${dexData}`, value: ""},
+            {name: `Estadisticas`, value: `${stats[0][0]} : ${stats[0][1]}
                                     ${stats[1][0]} : ${stats[1][1]} 
                                     ${stats[2][0]} : ${stats[2][1]}
                                     ${stats[3][0]} : ${stats[3][1]}
@@ -84,15 +104,13 @@ function embedReturn(name, spriteUrl, dexData, types, stats){
                                                                stats[2][1] +
                                                                stats[3][1] +
                                                                stats[4][1] +
-                                                               stats[5][1])}`
-                                }
-
+                                                               stats[5][1])}`},
         ); 
     
     return {embeds: [pokeEmbed]};
     
 }
-module.exports = {pokemondata, getDexEntries, embedReturn, statsReturn};
+module.exports = {pokemondata, getDexEntries, embedReturn, statsReturn, getDexNum};
 
 
 
