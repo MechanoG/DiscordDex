@@ -14,7 +14,7 @@ async function pokemondata(pokename){
 
         return pokedata;
 
-        console.log(pokedata.species.url);
+       
     }catch(error){
         console.log(error);
     }   
@@ -78,8 +78,9 @@ function statsReturn(stats){
 
 function typeAsing(types){
 
-    if (types.length>1) return `${types[0].type.name} | ${types[1].type.name}`
-    return `${types[0].type.name}`  
+    if (types.length>1) return `${types[0].type.name.slice(0,1).toUpperCase() + types[0].type.name.slice(1)}` + ' | ' + 
+                               `${types[1].type.name.slice(0,1).toUpperCase() + types[1].type.name.slice(1)}`
+    return `${types[0].type.name.slice(0,1).toUpperCase() + types[0].type.name.slice(1)}`  
 }
 
 function embedReturn(name, spriteUrl, dexData, types, stats, dexNum, altura, peso){
@@ -88,7 +89,7 @@ function embedReturn(name, spriteUrl, dexData, types, stats, dexNum, altura, pes
         .setTitle('NATIONAL POKEDEX:')
         .setImage(`${spriteUrl}`)
         .addFields(
-            {name: `No ${dexNum}  ${name}`, value: ""},
+            {name: `No${dexNum}  ${name.slice(0,1).toUpperCase()}${name.slice(1)} `, value: ""},
             {name: `HEIGHT: ${altura/10} m`, value:""},
             {name: `WEIGHT: ${peso/10} kg`, value:""},
             {name: `TYPES: ${typeAsing(types)}`, value:""},
